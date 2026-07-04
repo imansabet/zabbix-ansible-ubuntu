@@ -36,33 +36,82 @@ common --> packages.yml
 common --> timezone.yml
 
 common --> verify.yml
+
+```
+```mermaid
+graph TD
+    A[Inventory]
+    B[Gather Facts]
+    C[Common Role]
+    D[Packages]
+    E[Timezone]
+    F[Verification]
+    G[Play Recap]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+```
+```mermaid
+graph LR
+
+Controller["Ansible Controller"]
+
+Server["Zabbix Server"]
+
+Agent["Zabbix Agent"]
+
+Controller -->|SSH| Server
+Controller -->|SSH| Agent
+
+Server -->|Monitor| Agent
 ```
 ```mermaid
 graph TD
 
-Inventory
+Project["zabbix-ansible-ubuntu"]
 
-↓
+Project --> Inventory["inventory/"]
+Project --> Roles["roles/"]
+Project --> Playbooks["playbooks/"]
+Project --> Docs["docs/"]
 
-Gather Facts
+Roles --> Common["common"]
+Roles --> Server["server"]
+Roles --> Agent["agent"]
+Roles --> Proxy["proxy"]
 
-↓
+Common --> Tasks["tasks"]
+Common --> Handlers["handlers"]
+```
+```mermaid
+graph TD
 
-Common Role
+Common["common role"]
 
-↓
+Common --> Packages["packages.yml"]
+Common --> Timezone["timezone.yml"]
+Common --> Verify["verify.yml"]
+```
+```mermaid
+graph TD
 
-Packages
+Template["Template Module"]
 
-↓
+Changed{"File Changed?"}
 
-Timezone
+Notify["notify"]
 
-↓
+Handler["Handler"]
 
-Verification
+Restart["Restart Service"]
 
-↓
-
-Play Recap
+Template --> Changed
+Changed -->|Yes| Notify
+Notify --> Handler
+Handler --> Restart
+Changed -->|No| End["No Action"]
 ```
