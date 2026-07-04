@@ -1,0 +1,9 @@
+---
+- name: Install common packages
+  ansible.builtin.import_tasks: packages.yml
+
+- name: Configure timezone
+  ansible.builtin.import_tasks: timezone.yml
+
+- name: Verify common configuration
+  ansible.builtin.import_tasks: verify.yml

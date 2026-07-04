@@ -1,0 +1,7 @@
+---
+- name: Deploy welcome file
+  ansible.builtin.template:
+    src: welcome.j2
+    dest: /tmp/welcome.txt
+    mode: "0644"
+  notify: Show welcome handler

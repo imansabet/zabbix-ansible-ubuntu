@@ -1,0 +1,4 @@
+---
+- name: Show welcome handler
+  ansible.builtin.debug:
+    msg: "Template changed on {{ inventory_hostname }}"

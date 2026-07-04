@@ -1,0 +1,7 @@
+---
+- name: Apply common role
+  hosts: all
+  gather_facts: true
+
+  roles:
+    - common
