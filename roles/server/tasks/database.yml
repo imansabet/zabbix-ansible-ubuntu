@@ -1,0 +1,27 @@
+---
+- name: Install MariaDB server
+  ansible.builtin.apt:
+    name:
+      - mariadb-server
+      - python3-pymysql
+    state: present
+
+
+
+- name: Enable and start MariaDB service
+  ansible.builtin.systemd:
+    name: mariadb
+    enabled: true
+    state: started
+
+- name: Gather service facts
+  ansible.builtin.service_facts:
+
+
+- name: Verify MariaDB service
+  ansible.builtin.assert:
+    that:
+      - "'mariadb.service' in ansible_facts.services"
+      - ansible_facts.services['mariadb.service'].state == "running"
+    fail_msg: MariaDB service verification failed.
+    success_msg: MariaDB service is running.

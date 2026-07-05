@@ -1,0 +1,19 @@
+---
+- name: Install Zabbix server packages
+  ansible.builtin.apt:
+    name:
+      - zabbix-server-mysql
+      - zabbix-frontend-php
+      - php8.3-mysql
+      - zabbix-apache-conf
+      - zabbix-sql-scripts
+    state: present
+    update_cache: true
+
+- name: Verify Zabbix server package
+  ansible.builtin.package_facts:
+
+- name: Assert Zabbix server installed
+  ansible.builtin.assert:
+    that:
+      - "'zabbix-server-mysql' in ansible_facts.packages"

@@ -1,0 +1,19 @@
+---
+- name: Download Zabbix repository package
+  ansible.builtin.get_url:
+    url: "{{ zabbix_repo_url }}"
+    dest: "/tmp/{{ zabbix_repo_package }}"
+    mode: "0644"
+    timeout: 30
+  register: repo_download
+  retries: 5
+  delay: 10
+  until: repo_download is succeeded
+
+- name: Install Zabbix repository
+  ansible.builtin.apt:
+    deb: "/tmp/{{ zabbix_repo_package }}"
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes

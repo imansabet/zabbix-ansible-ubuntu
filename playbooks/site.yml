@@ -1,10 +1,16 @@
-- name: setup server
+---
+- name: Setup Zabbix Server
   hosts: servers
+  become: true
+
   roles:
     - common
     - server
-- name: setup agent
+
+- name: Setup Zabbix Agent
   hosts: agents
+  become: true
+
   roles:
     - common
-    - agent  
+    - agent

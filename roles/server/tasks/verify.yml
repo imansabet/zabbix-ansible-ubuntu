@@ -1,0 +1,7 @@
+- name: Verify repository package
+  ansible.builtin.package_facts:
+
+- name: Check repository package
+  ansible.builtin.assert:
+    that:
+      - "'zabbix-release' in ansible_facts.packages"

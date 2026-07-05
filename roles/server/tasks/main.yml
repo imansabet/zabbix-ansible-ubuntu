@@ -1,0 +1,5 @@
+---
+- import_tasks: repository.yml
+- import_tasks: database.yml
+- import_tasks: zabbix.yml 
+- import_tasks: database_config.yml

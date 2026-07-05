@@ -1,0 +1,9 @@
+---
+zabbix_version: "7.2"
+
+ubuntu_release: noble
+
+zabbix_repo_package: "zabbix-release_latest_7.2+ubuntu24.04_all.deb"
+zabbix_repo_url: "https://repo.zabbix.com/zabbix/{{ zabbix_version }}/release/ubuntu/pool/main/z/zabbix-release/{{ zabbix_repo_package }}"
+
+mariadb_socket: /run/mysqld/mysqld.sock

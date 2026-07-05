@@ -1,0 +1,15 @@
+---
+- name: Create Zabbix database
+  community.mysql.mysql_db:
+    name: zabbix
+    state: present
+    login_unix_socket: "{{ mariadb_socket }}"
+
+- name: Create Zabbix user
+  community.mysql.mysql_user:
+    name: zabbix
+    password: zabbix
+    priv: "zabbix.*:ALL"
+    host: localhost
+    state: present
+    login_unix_socket: "{{ mariadb_socket }}"
